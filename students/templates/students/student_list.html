@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Student List{% endblock %}
+
+{% block content %}
+    <h2>Student List</h2>
+    <a href="{% url 'student_create' %}" class="action-link">Add New Student</a>
+
+    {% if students %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Grade</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.roll_no }}</td>
+                        <td>{{ student.grade }}</td>
+                        <td>{{ student.is_active|yesno:"Yes,No" }}</td>
+                        <td>
+                            <a href="{% url 'student_detail' student.pk %}" class="action-link">View</a>
+                            <a href="{% url 'student_update' student.pk %}" class="action-link">Edit</a>
+                            <a href="{% url 'student_delete' student.pk %}" class="action-link delete-button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No students found. <a href="{% url 'student_create' %}">Add one!</a></p>
+    {% endif %}
+{% endblock %}

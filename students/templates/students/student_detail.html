@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Detail{% endblock %}
+
+{% block content %}
+    <h2>Student Details</h2>
+    <p><strong>Name:</strong> {{ student.name }}</p>
+    <p><strong>Roll No:</strong> {{ student.roll_no }}</p>
+    <p><strong>Grade:</strong> {{ student.grade }}</p>
+    <p><strong>Is Active:</strong> {{ student.is_active|yesno:"Yes,No" }}</p>
+
+    <a href="{% url 'student_update' student.pk %}" class="action-link">Edit Profile</a>
+    <a href="{% url 'student_delete' student.pk %}" class="action-link delete-button">Delete Record</a>
+    <a href="{% url 'student_list' %}" class="action-link">Back to List</a>
+{% endblock %}
